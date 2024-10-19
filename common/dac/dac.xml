@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component version="1.1" xmlns="http://schemas.circuit-diagram.org/circuitDiagramDocument/2012/component/xml">
+  <declaration>
+    <meta name="name" value="DAC" />
+    <meta name="version" value="1.1.2" />
+    <meta name="minsize" value="60" />
+    <meta name="author" value="MarioSanz" />
+    <meta name="additionalinformation" value="http://www.circuit-diagram.org/" />
+    <meta name="guid" value="eb7b7306-3ef1-47b9-8599-81d8d5933674" />
+    <meta name="implementset" value="http://schemas.circuit-diagram.org/circuitDiagramDocument/2012/components/common" />
+    <meta name="implementitem" value="adc" />
+    <property name="Address_CS" type="bool" default="false" serialize="address_cs" display="Address or CS Pin" />
+    <property name="InputType" type="enum" default="SPI" serialize="inputtype" display="Input Type">
+      <option>SPI</option>
+      <option>UART</option>
+      <option>I2C</option>
+    </property>
+  </declaration>
+  <connections>
+    <group conditions="horizontal">
+      <connection name="analog" start="_Middle+25x" end="_End" edge="end" />
+	  <group conditions="$InputType==SPI">
+        <connection name="MOSI" start="_Start" end="_Middle-25x+10y" edge="start" />
+        <connection name="MISO" start="_Start" end="_Middle-25x" edge="start" />
+        <connection name="CLK" start="_Start" end="_Middle+25x-10y" edge="start" />
+		<group conditions="$Address_CS">
+		  <connection name="CS" start="_Middle-20x+15y" end="_End" edge="end" />
+		</group>
+	  </group>
+	  <group conditions="$InputType==I2C">
+        <connection name="SDA" start="_Middle+25x+10y" end="_Middle-25x+10y" edge="start" />
+        <connection name="SCL" start="_Middle+25x-10y" end="_End" edge="start" />
+		<group conditions="$Address_CS">
+		  <connection name="ADDR" start="_Middle+20x+15y" end="_End" edge="end" />
+		</group>
+	  </group>
+	  <group conditions="$InputType==UART">
+        <connection name="TX" start="_Middle+25x+10y" end="_Middle-25x+10y" edge="start" />
+        <connection name="RX" start="_Middle+25x-10y" end="_End" edge="start" />
+	  </group>
+	</group>
+    <group conditions="!horizontal">
+      <connection name="analog" start="_Start" end="_Middle-25y" edge="start" />
+	  <group conditions="$InputType==SPI">
+        <connection name="MOSI" start="_Middle+10x+25y" end="_End" edge="end" />
+        <connection name="MISO" start="_Middle+25y" end="_End" edge="end" />
+        <connection name="CLK" start="_Middle-10x+25y" end="_End" edge="end" />
+		<group conditions="$Address_CS">
+		  <connection name="CS" start="_Middle-15x+20y" end="_End" edge="end" />
+		</group>
+	  </group>
+	  <group conditions="$InputType==I2C">
+        <connection name="SDA" start="_Middle+10x+25y" end="_End" edge="end" />
+        <connection name="SCL" start="_Middle-10x+25y" end="_End" edge="end" />
+		<group conditions="$Address_CS">
+		  <connection name="ADDR" start="_Middle-15x+20y" end="_End" edge="end" />
+		</group>
+	  </group>
+	  <group conditions="$InputType==UART">
+        <connection name="TX" start="_Middle+10x+25y" end="_End" edge="end" />
+        <connection name="RX" start="_Middle-10x+25y" end="_End" edge="end" />
+	  </group>
+    </group>
+  </connections>
+  <render>
+    <group conditions="horizontal">
+ 	  <path start="_Middle" data="m -25,0 l 10,15 l 40,0 l 0,-30 l -40,0 l -10,15 z" />
+      <line start="_Start" end="_Middle-25x" edge="start" />
+	  <group conditions="$InputType==SPI">
+        <line start="_Middle+25x+10y" end="_End+10y" edge="end" />
+        <line start="_Middle+25x" end="_End" edge="end" />
+        <line start="_Middle+25x-10y" end="_End-10y" edge="end" />
+		<group conditions="$Address_CS">
+		  <line start="_Middle+20x+15y" end="_Middle+20x+30y" edge="end" />
+		</group>
+	  </group>
+	  <group conditions="$InputType==I2C">
+        <line start="_Middle+25x+10y" end="_End+10y" edge="end" />
+        <line start="_Middle+25x-10y" end="_End-10y" edge="end" />
+		<group conditions="$Address_CS">
+		  <line start="_Middle+20x+15y" end="_Middle+20x+30y" edge="end" />
+		</group>
+	  </group>
+	  <group conditions="$InputType==UART">
+        <line start="_Middle+25x+10y" end="_End+10y" edge="end" />
+        <line start="_Middle+25x-10y" end="_End-10y" edge="end" />
+	  </group>
+    </group>
+    <group conditions="!horizontal">
+ 	  <path start="_Middle" data="m 0,-25 l 15,10 l 0,40 l -30,0 l 0,-40 l 15,-10 z" />
+      <line start="_Start" end="_Middle-25y" edge="start" />
+	  <group conditions="$InputType==SPI">
+        <line start="_Middle+10x+25y" end="_End+10x" edge="end" />
+        <line start="_Middle+25y" end="_End" edge="end" />
+        <line start="_Middle-10x+25y" end="_End-10x" edge="end" />
+		<group conditions="$Address_CS">
+		  <line start="_Middle-15x+20y" end="_Middle-30x+20y" edge="end" />
+		</group>
+	  </group>
+	  <group conditions="$InputType==I2C">
+        <line start="_Middle+10x+25y" end="_End+10x" edge="end" />
+        <line start="_Middle-10x+25y" end="_End-10x" edge="end" />
+		<group conditions="$Address_CS">
+		  <line start="_Middle-15x+20y" end="_Middle-30x+20y" edge="end" />
+		</group>
+	  </group>
+	  <group conditions="$InputType==UART">
+        <line start="_Middle+10x+25y" end="_End+10x" edge="end" />
+        <line start="_Middle-10x+25y" end="_End-10x" edge="end" />
+	  </group>
+    </group>
+  </render>
+</component>
